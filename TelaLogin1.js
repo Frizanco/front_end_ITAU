@@ -8,9 +8,17 @@ function autenticar(){
 
     // ALGUNS PASSOS
     // MENSAGEM DO CORPO
+    var func=0;
+    if(! isNaN(txtEmail)){
+        func = parseInt(txtEmail);
+    }
+
+    //mensagem do corpo
     var msgBody = {
-        email : txtEmail,
-        senha : txtSenha
+        email     : txtEmail,
+        racf      : txtEmail,
+        funcional : func,
+        senha     : txtSenha
     }
 
     // FORMATO DA MENSAGEM DO CABECALHO
@@ -24,6 +32,7 @@ function autenticar(){
 
     // agora sim posso enviar os dados
     // LANCAMOS RESPOSTA AO BACKEND. COM O RESULTADO, TRATAMOS NA FUNCAO DE RESPOSTA
+    
     fetch("http://localhost:8088/login", cabecalho)
         .then(res => trataResposta(res))
 }

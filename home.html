@@ -16,7 +16,9 @@
 
             <div class="row" id="linhaUser">
                 <div id ="fotoUSER" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">***FOTO DO USUARIO***</div>
-                <div id ="infoUSER" class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">***TEXTO DO USUARIO***</div>
+                <div id ="infoUSER" class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12">***TEXTO DO USUARIO***</div>
+                <div                class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-primary float-right" onclick="logout()">Logout</button></div>
             </div>
 
             <div id="seletorDeRelatorio">
@@ -38,16 +40,17 @@
                             <label class="form-check-label" for="selectCliente">Cliente</label>
                             <input type="text" id="txtCliente" class="form-control">
                         </div>
-
-
-                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xm-12">
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xm-12">
                         <button type="button" class="btn btn-primary" onclick="gerarRelatorio()">Gerar</button>
-                        </div>
                     </div>
                 </div>
             </div>
-
+            <div class="row" id="tabela">
+                <div class="col-12">
+                    <div id="relatorios"></div>
+                </div>
+            </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

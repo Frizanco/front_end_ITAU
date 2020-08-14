@@ -70,4 +70,63 @@ function gerarRelatorio(){
     console.log(op.options[op.selectedIndex].value);
     console.log(document.getElementById("txtData").value);
     console.log(document.getElementById("txtCliente").value);
+
+    if(combinacao == 0){//sem filtro
+        fetch("http://localhost:8088/agendamento/todos")
+                  .then(res => res.json())
+                  .then(res => trataResultado(res));
+    }else if(combinacao == 1){
+        fetch("http://localhost:8088/agendamentos/filtrarporagencia?agencia=" + document.getElementById("selectAg").value)
+                  .then(res => res.json())
+                  .then(res => trataResultado(res));
+
+    }else if(combinacao == 2){ //só data
+        fetch("http://localhost:8088/agendamentos/filtrarpordata?data=" + document.getElementById("txtData").value)
+        .then(res => res.json())
+        .then(res => trataResultado(res));
+        
+    }else if(combinacao == 3){//agencia+data
+        fetch("http://localhost:8088/agendamentos/filtrarporAgenciaData?agencia=" + document.getElementById("selectAg").value + "&data=" + document.getElementById("txtData").value)
+        .then(res => res.json())
+        .then(res => trataResultado(res));
+        
+    }else if(combinacao == 4){//só cliente
+        fetch("http://localhost:8088/agendamentos/filtrarporcliente?nomecli=" + document.getElementById("txtCliente").value)
+                  .then(res => res.json())
+                  .then(res => trataResultado(res));
+        
+    }else if(combinacao == 5){//agencia+cliente
+        fetch("http://localhost:8088/agendamentos/filtrarporAgenciaCliente?agencia=" + document.getElementById("selectAg").value + "&nomecli=" + document.getElementById("txtCliente").value)
+        .then(res => res.json())
+        .then(res => trataResultado(res));
+        
+    }else if(combinacao == 6){//data+cliente
+        fetch("http://localhost:8088/agendamentos/filtrarpordataCliente?data=" + document.getElementById("txtData").value + "&nomecli=" + document.getElementById("txtCliente").value)
+        .then(res => res.json())
+        .then(res => trataResultado(res));
+        
+    }else {//agencia+data+cliente
+        fetch("http://localhost:8088/agendamentos/filtrarporagenciaDataCliente?agencia="+ document.getElementById("selectAg").value + "&data=" + document.getElementById("txtData").value + "&nomecli=" + document.getElementById("txtCliente").value)
+        .then(res => res.json())
+        .then(res => trataResultado(res));
+    }
 }
+
+function trataResultado(res){
+    var rel = "<br><table border=2 width='100%'>";
+    rel += "<tr><th>Agencia</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Data</th><th>Hora</th><th>Observacoes</th></tr>"
+    for(i=0; i<res.length; i++){
+        var ag = res[i];
+        rel += "<tr>" + "<td>"+ ag.agc.nome + "</td>" + "<td>" +ag.nomeCliente + "</td>" + "<td>" + ag.emailCliente + "</td>" + "<td>" + ag.celularCliente + "</td>" + "<td>" + ag.dataAgendamento + "</td>" + "<td>" + ag.horaAgendamento + "</td>" + "<td>" + ag.observacoes + "</td>";
+
+    }
+    rel += "</table><br>";
+    document.getElementById("relatorios").innerHTML = rel;
+
+}
+
+function logout(){
+    localStorage.removeItem("ScheduleUSER");
+    window.location = "TelaLogin1.html";
+}
+
